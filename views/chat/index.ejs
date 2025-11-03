@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head", { title: "AI Chat Companion" }) %>
+  <body class="bg-gray-100 min-h-screen flex flex-col">
+    <%- include("../partials/navbar") %>
+
+    <div class="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
+      <h2 class="text-2xl font-bold text-indigo-600 mb-4 text-center">
+        🤖 ShasthoSheba AI Chat Companion
+      </h2>
+
+      <div
+        id="chatBox"
+        class="h-96 overflow-y-auto border p-4 rounded bg-gray-50 mb-4"
+      ></div>
+
+      <form id="chatForm" class="flex space-x-2">
+        <input
+          type="text"
+          id="userInput"
+          name="message"
+          placeholder="Type your message..."
+          class="flex-1 border p-2 rounded focus:outline-indigo-600"
+          required
+        />
+        <button
+          type="submit"
+          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+
+    <script>
+      const chatBox = document.getElementById("chatBox");
+      const chatForm = document.getElementById("chatForm");
+      const userInput = document.getElementById("userInput");
+
+      chatForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const message = userInput.value.trim();
+        if (!message) return;
+
+        chatBox.innerHTML += `<div class='text-right text-blue-600 my-2'><b>You:</b> ${message}</div>`;
+        userInput.value = "";
+
+        const res = await fetch("/dashboard/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message }),
+        });
+
+        const data = await res.json();
+        chatBox.innerHTML += `<div class='text-left text-gray-700 my-2'><b>AI:</b> ${data.reply}</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+      });
+    </script>
+  </body>
+</html>

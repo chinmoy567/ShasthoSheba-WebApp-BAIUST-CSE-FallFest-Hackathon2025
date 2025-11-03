@@ -1,0 +1,320 @@
+<%- include('../partials/head', { title: 'ShasthoSheba - স্বাস্থ্যসেবা' }) %>
+
+<body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100">
+    <%- include('../partials/navbar') %>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 py-20 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="hero-heading text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
+                    ShasthoSheba<br>স্বাস্থ্যসেবা
+                </h1>
+                <p class="text-lg sm:text-xl text-blue-200 mb-8 max-w-xl">
+                    আপনার ডিজিটাল স্বাস্থ্য সঙ্গী। গ্রামীণ বাংলাদেশের জন্য তৈরি, গোপনীয়তা ও সহজলভ্যতার সাথে।
+                </p>
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <a href="/auth/register" 
+                       class="accent-btn inline-flex items-center gap-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-8 py-4 rounded-2xl font-bold transform hover:scale-105 transition duration-200 animate-pulse-glow card-shadow border border-yellow-400">
+                       শুরু করুন - বিনামূল্যে
+                    </a>
+                    <a href="/features" 
+                       class="inline-flex items-center gap-3 border-2 border-yellow-500 text-yellow-400 px-8 py-4 rounded-2xl font-semibold bg-transparent hover:bg-yellow-500 hover:text-gray-900 transition duration-200">
+                       বৈশিষ্ট্য সমূহ
+                    </a>
+                </div>
+                <div class="flex items-center gap-4 text-blue-300">
+                    <div class="flex items-center gap-2">
+                        <span class="text-yellow-400">✓</span> ১০০% বিনামূল্যে
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-yellow-400">✓</span> অফলাইন কাজ করে
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-yellow-400">✓</span> সম্পূর্ণ গোপনীয়
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl blur-lg opacity-20"></div>
+                    <img src="/images/hero-health.png" alt="Health App Visual" class="relative w-full max-w-xl rounded-2xl card-shadow transform hover:scale-105 transition duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section - Based on the 9 Missions -->
+    <section class="bg-gradient-to-br from-blue-900 to-gray-900 py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600">
+                আমাদের বৈশিষ্ট্য সমূহ
+            </h2>
+            <p class="text-blue-200 text-center max-w-2xl mx-auto mb-12">
+                জাতিসংঘের টেকসই উন্নয়ন লক্ষ্যমাত্রা ৩ অনুযায়ী তৈরি ৯টি বিশেষ বৈশিষ্ট্য
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Mission 1 -->
+                <div class="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 card-shadow border border-blue-600/30 hover:border-yellow-500/50 transition-all duration-300 transform hover:scale-105">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 metallic-effect">
+                        <span class="text-gray-900 font-bold">১</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">মানসিক স্বাস্থ্য চেক-ইন</h3>
+                    <p class="text-blue-200 mb-4">প্রতিদিনের মনের অবস্থা ট্র্যাক করুন। বাংলায় সহজ মood স্কেল।</p>
+                    <a href="/mental-health" class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm flex items-center gap-1">
+                        শুরু করুন <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Mission 2 -->
+                <div class="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 card-shadow border border-blue-600/30 hover:border-yellow-500/50 transition-all duration-300 transform hover:scale-105">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 metallic-effect">
+                        <span class="text-gray-900 font-bold">২</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">স্বাস্থ্য সেবা ম্যাপ</h3>
+                    <p class="text-blue-200 mb-4">আপনার এলাকার নিকটবর্তী হাসপাতাল, ক্লিনিক ও স্বাস্থ্যকর্মী খুঁজুন।</p>
+                    <a href="/health-map" class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm flex items-center gap-1">
+                        দেখুন <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Mission 3 -->
+                <div class="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 card-shadow border border-blue-600/30 hover:border-yellow-500/50 transition-all duration-300 transform hover:scale-105">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 metallic-effect">
+                        <span class="text-gray-900 font-bold">৩</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">গোপন সহায়তা অনুরোধ</h3>
+                    <p class="text-blue-200 mb-4">নাম প্রকাশ না করে মানসিক স্বাস্থ্য সহায়তা পান। সম্পূর্ণ গোপনীয়।</p>
+                    <a href="/anonymous-help" class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm flex items-center gap-1">
+                        অনুরোধ করুন <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Mission 4 -->
+                <div class="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 card-shadow border border-blue-600/30 hover:border-yellow-500/50 transition-all duration-300 transform hover:scale-105">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 metallic-effect">
+                        <span class="text-gray-900 font-bold">৪</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">মৌসুমী স্বাস্থ্য টিপস</h3>
+                    <p class="text-blue-200 mb-4">ডেঙ্গু, সর্দি-কাশি, ডায়রিয়া প্রতিরোধে ঋতুভিত্তিক পরামর্শ।</p>
+                    <a href="/health-tips" class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm flex items-center gap-1">
+                        পড়ুন <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Mission 5 -->
+                <div class="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 card-shadow border border-blue-600/30 hover:border-yellow-500/50 transition-all duration-300 transform hover:scale-105">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 metallic-effect">
+                        <span class="text-gray-900 font-bold">৫</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">মাতৃ ও শিশু স্বাস্থ্য</h3>
+                    <p class="text-blue-200 mb-4">গর্ভকালীন যত্ন ও টিকা সময়সূচী রিমাইন্ডার।</p>
+                    <a href="/maternal-child" class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm flex items-center gap-1">
+                        ট্র্যাক করুন <span>→</span>
+                    </a>
+                </div>
+
+                <!-- Mission 6 -->
+                <div class="bg-blue-800/50 backdrop-blur-sm rounded-2xl p-6 card-shadow border border-blue-600/30 hover:border-yellow-500/50 transition-all duration-300 transform hover:scale-105">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 metallic-effect">
+                        <span class="text-gray-900 font-bold">৬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-yellow-400 mb-3">লক্ষণ নির্দেশিকা</h3>
+                    <p class="text-blue-200 mb-4">কখন ডাক্তারের কাছে যাবেন - বিপদ সংকেত চিনুন।</p>
+                    <a href="/symptoms" class="text-yellow-400 hover:text-yellow-300 font-semibold text-sm flex items-center gap-1">
+                        শিখুন <span>→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="bg-gradient-to-br from-gray-900 to-blue-900 py-20 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-3xl font-bold text-yellow-400 mb-6">কিভাবে কাজ করে?</h2>
+                <p class="text-blue-200 mb-6">গ্রামীণ বাংলাদেশের চাহিদা অনুযায়ী তৈরি - ইন্টারনেট ছাড়াই কাজ করে, সম্পূর্ণ গোপনীয়তা রক্ষা করে।</p>
+                <ul class="space-y-4 text-yellow-300">
+                    <li class="flex items-center gap-3">
+                        <div class="w-6 h-6 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center metallic-effect">
+                            <span class="text-gray-900 text-sm font-bold">✓</span>
+                        </div>
+                        অফলাইন কাজ করে - কম ইন্টারনেটেও ব্যবহারযোগ্য
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div class="w-6 h-6 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center metallic-effect">
+                            <span class="text-gray-900 text-sm font-bold">✓</span>
+                        </div>
+                        বাংলা ভাষায় - স্থানীয় ভাষায় বোঝা সহজ
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div class="w-6 h-6 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center metallic-effect">
+                            <span class="text-gray-900 text-sm font-bold">✓</span>
+                        </div>
+                        সম্পূর্ণ বিনামূল্যে - কোনো খরচ নেই
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div class="w-6 h-6 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center metallic-effect">
+                            <span class="text-gray-900 text-sm font-bold">✓</span>
+                        </div>
+                        গোপনীয়তা সুরক্ষিত - ডেটা শুধু আপনার ডিভাইসে
+                    </li>
+                </ul>
+            </div>
+            <div class="flex justify-end">
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-2xl blur-lg opacity-20"></div>
+                    <img src="/images/how-it-works.png" alt="How it works" class="relative rounded-2xl card-shadow w-full max-w-xl transform hover:scale-105 transition">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-gradient-to-br from-blue-900 to-gray-900 py-16 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-lg sm:text-xl font-bold text-yellow-400 mb-2">গ্রামীণ বাংলাদেশের জন্য</h2>
+            <p class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-4">স্বাস্থ্য সেবাকে সকলের দোরগোড়ায় পৌঁছে দিতে</p>
+            <p class="text-blue-200 max-w-2xl mx-auto mb-8">স্টিগমা, দূরত্ব এবং সচেতনতার অভাব - এই তিনটি বড় চ্যালেঞ্জ মোকাবেলায় আমাদের অঙ্গীকার।</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-blue-800/50 backdrop-blur-sm p-6 rounded-2xl card-shadow text-center popout-hover border border-blue-600/30">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-4 metallic-effect">
+                        <span class="text-2xl text-gray-900">🏥</span>
+                    </div>
+                    <p class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-2">৫০+</p>
+                    <p class="text-blue-200">উপজেলায় ব্যবহারযোগ্য</p>
+                </div>
+                <div class="bg-blue-800/50 backdrop-blur-sm p-6 rounded-2xl card-shadow text-center popout-hover border border-blue-600/30">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-4 metallic-effect">
+                        <span class="text-2xl text-gray-900">👥</span>
+                    </div>
+                    <p class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-2">১০০%</p>
+                    <p class="text-blue-200">বিনামূল্যে সেবা</p>
+                </div>
+                <div class="bg-blue-800/50 backdrop-blur-sm p-6 rounded-2xl card-shadow text-center popout-hover border border-blue-600/30">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-4 metallic-effect">
+                        <span class="text-2xl text-gray-900">📱</span>
+                    </div>
+                    <p class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-2">অফলাইন</p>
+                    <p class="text-blue-200">ইন্টারনেট ছাড়া কাজ করে</p>
+                </div>
+                <div class="bg-blue-800/50 backdrop-blur-sm p-6 rounded-2xl card-shadow text-center popout-hover border border-blue-600/30">
+                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mx-auto mb-4 metallic-effect">
+                        <span class="text-2xl text-gray-900">🔒</span>
+                    </div>
+                    <p class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-2">গোপনীয়</p>
+                    <p class="text-blue-200">ডেটা শুধু আপনার ডিভাইসে</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="bg-gradient-to-br from-gray-900 to-blue-900 py-16 px-6">
+        <div class="max-w-3xl mx-auto bg-blue-800/50 backdrop-blur-sm rounded-2xl p-8 text-center card-shadow popout-hover border border-yellow-500/30">
+            <p class="text-2xl text-yellow-400 mb-4">"আমার গ্রামে মানসিক স্বাস্থ্য নিয়ে কথা বলা খুব কঠিন ছিল। ShasthoSheba অ্যাপটি আমাকে সাহায্য করেছে নিঃশব্দে সহায়তা পেতে।"</p>
+            <div class="flex items-center justify-center gap-3">
+                <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center metallic-effect">
+                    <span class="text-gray-900 font-bold">হ</span>
+                </div>
+                <div>
+                    <p class="text-yellow-400 font-bold">হাবলু</p>
+                    <p class="text-blue-200 text-sm">গ্রামীণ যুবক, রংপুর</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="bg-gradient-to-br from-blue-900 to-gray-900 py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold text-yellow-400 mb-4">আজই শুরু করুন আপনার স্বাস্থ্য যাত্রা</h2>
+            <p class="text-lg sm:text-xl font-bold text-blue-200 mb-8">সম্পূর্ণ বিনামূল্যে, কোনো ক্রেডিট কার্ডের প্রয়োজন নেই।</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/auth/register" 
+                   class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-8 py-4 rounded-2xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition transform hover:scale-105 card-shadow border border-yellow-400">
+                   নিবন্ধন করুন
+                </a>
+                <a href="/about" 
+                   class="border-2 border-yellow-500 text-yellow-400 px-8 py-4 rounded-2xl font-semibold bg-transparent hover:bg-yellow-500 hover:text-gray-900 transition">
+                   আরও জানুন
+                </a>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mt-12 text-blue-300">
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-400">❤</span>
+                    <span>গ্রামীণ বাংলাদেশের জন্য তৈরি</span>
+                </div>
+                <span>•</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-400">🎯</span>
+                    <span>SDG 3 - ভালো স্বাস্থ্য ও সুস্থতা</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        @keyframes pulse-glow {
+            0%, 100% { 
+                box-shadow: 0 0 6px rgba(234, 179, 8, 0.35); 
+                transform: translateY(0); 
+            }
+            50% { 
+                box-shadow: 0 0 28px rgba(234, 179, 8, 0.65), 0 0 12px rgba(234, 179, 8, 0.35); 
+                transform: translateY(-2px); 
+            }
+        }
+        .animate-pulse-glow { 
+            animation: pulse-glow 2.4s ease-in-out infinite; 
+        }
+        .hero-heading { 
+            line-height: 1.12; 
+            -webkit-font-smoothing: antialiased; 
+            display: inline-block; 
+            overflow: visible; 
+            padding-bottom: 0.06em; 
+        }
+        .card-shadow { 
+            box-shadow: 0 12px 30px rgba(14, 12, 26, 0.5); 
+        }
+        .accent-link { 
+            color: #fbbf24; 
+            transition: color .2s ease; 
+        }
+        .accent-link:hover { 
+            color: #fcd34d; 
+        }
+        .check { 
+            background: rgba(234, 179, 8, 0.08); 
+            padding: 0.5rem 0.75rem; 
+            border-radius: 0.5rem; 
+            display:inline-flex; 
+            align-items:center; 
+            gap:.5rem; 
+        }
+        .nav-hover:hover { 
+            color: #fbbf24; 
+            text-shadow: 0 0 8px #fbbf24; 
+        }
+        .popout-hover { 
+            transition: transform .25s ease, box-shadow .25s ease; 
+        }
+        .popout-hover:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.6); 
+        }
+        .metallic-effect {
+            background: linear-gradient(145deg, #eab308, #ca8a04, #eab308);
+            box-shadow: 
+                inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</body>
+</html>

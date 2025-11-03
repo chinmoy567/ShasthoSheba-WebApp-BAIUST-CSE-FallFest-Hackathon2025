@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- ✅ Shared Head Partial -->
+  <%- include("../partials/head", { title: "Mental Health Check-In" }) %>
+
+  <body class="bg-gray-100 min-h-screen font-[Inter]">
+    <!-- ✅ Shared Navbar -->
+    <%- include("../partials/navbar") %>
+
+    <!-- ✅ Check-In Container -->
+    <div class="max-w-3xl mx-auto mt-12 p-8 bg-white shadow-xl rounded-2xl">
+      <h2 class="text-3xl font-bold text-indigo-600 mb-6">
+        🧠 Mental Health Check-In
+      </h2>
+
+      <div class="flex justify-between items-center mb-4">
+        <p class="text-gray-700">
+          Hello, <strong><%= user.name %></strong> — record your daily mood and
+          thoughts below.
+        </p>
+
+        <a
+          href="/dashboard/checkin/new"
+          class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+        >
+          + New Check-In
+        </a>
+      </div>
+
+      <!-- ✅ Check-in History List -->
+      <div class="mt-6">
+        <% if (checkins.length === 0) { %>
+        <p class="text-gray-500 text-center py-6">
+          No entries yet. Start your first check-in to track your mental health
+          journey. 💬
+        </p>
+        <% } else { %>
+        <ul class="space-y-4">
+          <% checkins.forEach(c => { %>
+          <li
+            class="p-4 border rounded-xl bg-gray-50 hover:shadow-md transition"
+          >
+            <p class="text-lg font-semibold"><%= c.mood %></p>
+            <p class="text-gray-600 mt-1">
+              <%= c.note || "No additional notes." %>
+            </p>
+            <p class="text-sm text-gray-400 mt-2">
+              🕒 <%= new Date(c.date).toLocaleString("en-US", { dateStyle:
+              "medium", timeStyle: "short" }) %>
+            </p>
+          </li>
+          <% }) %>
+        </ul>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- ✅ Footer -->
+    <footer class="mt-12 py-6 text-center text-gray-500 border-t">
+      <p>© 2025 ShasthoSheba | Health for Everyone</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head", { title: "New Check-In" }) %>
+  <body class="bg-gray-100 min-h-screen">
+    <%- include("../partials/navbar") %>
+
+    <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow">
+      <h2 class="text-2xl font-semibold mb-4">How are you feeling today?</h2>
+
+      <form method="POST" action="/dashboard/checkin/new" class="space-y-4">
+        <select name="mood" class="w-full border rounded p-2" required>
+          <option value="">Select mood</option>
+          <option>😊 Happy</option>
+          <option>😐 Neutral</option>
+          <option>😔 Sad</option>
+          <option>😤 Stressed</option>
+          <option>😴 Tired</option>
+        </select>
+
+        <textarea
+          name="note"
+          rows="3"
+          placeholder="Add a note (optional)"
+          class="w-full border rounded p-2"
+        ></textarea>
+
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          Save
+        </button>
+      </form>
+    </div>
+
+    <footer class="mt-10 py-6 text-center text-gray-500 border-t">
+      <p>© 2025 ShasthoSheba | Health for Everyone</p>
+    </footer>
+  </body>
+</html>
