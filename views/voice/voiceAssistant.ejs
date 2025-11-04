@@ -1,0 +1,169 @@
+<%- include("../partials/head") %> <%- include("../partials/navbar") %>
+
+<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+  <div
+    class="flex flex-col max-w-4xl w-full mx-auto mt-8 bg-white shadow-lg rounded-2xl flex-grow overflow-hidden"
+  >
+    <!-- Header -->
+    <header
+      class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center py-4 text-2xl font-semibold tracking-wide"
+    >
+      🎤 ভয়েস চ্যাট - <span class="text-yellow-300">MonBondhu</span>
+    </header>
+
+    <!-- Chat Box -->
+    <main
+      id="chatBox"
+      class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 scroll-smooth"
+    ></main>
+
+    <!-- Footer -->
+    <footer
+      class="border-t border-gray-200 p-4 flex flex-col items-center bg-white"
+    >
+      <button
+        id="recordBtn"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200"
+      >
+        🎙 বলুন
+      </button>
+      <audio
+        id="aiAudio"
+        controls
+        class="hidden mt-3 w-11/12 rounded-lg"
+      ></audio>
+    </footer>
+  </div>
+
+  <script>
+    let history = [];
+    const chatBox = document.getElementById("chatBox");
+    const aiAudio = document.getElementById("aiAudio");
+    const btn = document.getElementById("recordBtn");
+
+    function appendMessage(role, text) {
+      const wrapper = document.createElement("div");
+      wrapper.classList.add("flex", "items-start", "gap-3", "animate-fadeIn");
+
+      const isUser = role === "user";
+      wrapper.innerHTML = isUser
+        ? `
+        <div class="flex justify-end w-full">
+          <div class="bg-indigo-600 text-white px-4 py-3 rounded-2xl rounded-br-sm max-w-[80%] shadow-md">
+            ${text}
+          </div>
+          <span class="text-2xl ml-2">👤</span>
+        </div>`
+        : `
+        <div class="flex items-start w-full">
+          <span class="text-2xl mr-2">🤖</span>
+          <div class="bg-gray-200 text-gray-900 px-4 py-3 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm">
+            ${text}
+          </div>
+        </div>`;
+
+      chatBox.appendChild(wrapper);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function showTyping() {
+      const typingDiv = document.createElement("div");
+      typingDiv.classList.add("flex", "items-start", "gap-3", "typing");
+      typingDiv.innerHTML = `
+        <span class="text-2xl">🤖</span>
+        <div class="flex space-x-1 bg-gray-200 rounded-full px-3 py-2">
+          <span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></span>
+          <span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-150"></span>
+          <span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-300"></span>
+        </div>`;
+      chatBox.appendChild(typingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      return typingDiv;
+    }
+
+    btn.onclick = async () => {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          channelCount: 1,
+          sampleRate: 44100,
+          noiseSuppression: true,
+          echoCancellation: true,
+        },
+      });
+
+      const recorder = new MediaRecorder(stream, {
+        mimeType: "audio/webm;codecs=opus",
+        audioBitsPerSecond: 128000,
+      });
+
+      const chunks = [];
+      btn.innerText = "🎙 রেকর্ড হচ্ছে...";
+      btn.classList.add("bg-yellow-500");
+      recorder.ondataavailable = (e) => chunks.push(e.data);
+
+      recorder.onstop = async () => {
+        btn.innerText = "🎤 বলুন";
+        btn.classList.remove("bg-yellow-500");
+
+        const blob = new Blob(chunks, { type: "audio/webm" });
+        const formData = new FormData();
+        formData.append("audio", blob, "voice.webm");
+        formData.append("userId", "<%= user._id %>");
+        formData.append("history", JSON.stringify(history));
+
+        appendMessage("user", "🎧 আপনার ভয়েস প্রক্রিয়াজাত হচ্ছে...");
+        const typingDiv = showTyping();
+
+        const res = await fetch("/dashboard/voice/chat", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        chatBox.removeChild(typingDiv);
+        chatBox.lastChild.remove();
+
+        appendMessage("user", data.userSpeech || "শব্দ ধরা যায়নি।");
+        appendMessage(
+          "assistant",
+          data.aiText || "আমি বুঝতে পারিনি, আবার বলবেন?"
+        );
+
+        history.push({ role: "user", content: data.userSpeech });
+        history.push({ role: "assistant", content: data.aiText });
+
+        if (data.audio) {
+          const src = `data:audio/mp3;base64,${data.audio}`;
+          aiAudio.src = src;
+          aiAudio.classList.remove("hidden");
+          aiAudio.play();
+        }
+      };
+
+      recorder.start();
+      setTimeout(() => recorder.stop(), 5000);
+    };
+  </script>
+
+  <style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .delay-150 {
+      animation-delay: 0.15s;
+    }
+    .delay-300 {
+      animation-delay: 0.3s;
+    }
+  </style>
+</body>

@@ -14,6 +14,8 @@ const dashboardRoute = require("./routes/dashboardRouter");
 const checkinRoute = require("./routes/checkinRouter");
 const chatRoute = require("./routes/chatRouter");
 const symptomRoute = require("./routes/symptomRouter");
+const voiceRoute = require("./routes/voiceRouter");
+
 
 
 
@@ -38,8 +40,6 @@ app.use(
     },
   })
 );
-
-
 
 
 
@@ -73,10 +73,7 @@ app.use("/dashboard", dashboardRoute);
 app.use("/dashboard/checkin", checkinRoute);
 app.use("/dashboard/chat", chatRoute);
 app.use("/dashboard/symptom", symptomRoute);
-
-
-
-
+app.use("/dashboard/voice", voiceRoute);
 
 
 // Start the server
