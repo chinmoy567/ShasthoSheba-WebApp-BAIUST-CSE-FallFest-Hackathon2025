@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  app:
+    build: .
+    container_name: shastho-app
+    env_file: .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    # If you want live reload in dev, uncomment the volumes and command:
+    # volumes:
+    #   - .:/app
+    #   - /app/node_modules
+    # command: sh -c "npm run build:css && npm run dev"
+    command: ["node", "server.js"]
+
+  mongo:
+    image: mongo:7
+    container_name: shastho-mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpass
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  mongo_data:

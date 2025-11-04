@@ -1,0 +1,150 @@
+{
+  "info": {
+    "name": "OpenAI Core API (Chat, Embeddings, Images, Moderation)",
+    "_postman_id": "e9d9f3a2-7c2e-4b70-9b1f-example",
+    "description": "Quick-start Postman collection for OpenAI REST API. Set the `apiKey` variable at the collection level.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.openai.com/v1"
+    },
+    {
+      "key": "apiKey",
+      "value": ""
+    },
+    {
+      "key": "chat_model",
+      "value": "gpt-5-chat"
+    },
+    {
+      "key": "embed_model",
+      "value": "text-embedding-3-large"
+    },
+    {
+      "key": "image_model",
+      "value": "gpt-image-1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Chat Completions: simple",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{apiKey}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/chat/completions",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "chat",
+            "completions"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"{{chat_model}}\",\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are a helpful assistant.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Write a haiku about Docker.\"\n    }\n  ]\n}"
+        }
+      }
+    },
+    {
+      "name": "Embeddings",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{apiKey}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/embeddings",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "embeddings"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"{{embed_model}}\",\n  \"input\": \"Hello world\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Images: generate",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{apiKey}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/images/generations",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "images",
+            "generations"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"{{image_model}}\",\n  \"prompt\": \"A minimalist logo of a stethoscope shaped like a heart\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Moderations",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{apiKey}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/moderations",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "moderations"
+          ]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"model\": \"omni-moderation-latest\",\n  \"input\": \"I want to hurt someone\"\n}"
+        }
+      }
+    }
+  ]
+}
