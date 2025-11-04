@@ -1,7 +1,7 @@
 // controllers/dashboardController.js
 const getDashboardPage = (req, res) => {
   try {
-    // ✅ Protect the route
+    //  Protect the route
     if (!req.session.isLoggedIn) {
       return res.render("message", {
         title: "Unauthorized Access",
@@ -10,7 +10,7 @@ const getDashboardPage = (req, res) => {
       });
     }
 
-    // ✅ Render the dashboard view
+    //  Render the dashboard view
     res.render("dashboardPage/dashboardPageIndex", {
       title: "Dashboard",
       user: req.session.user,

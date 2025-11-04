@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <%- include('../partials/head', { title: 'স্বেচ্ছাসেবী স্বাস্থ্যকর্মী ডিরেক্টরি' }) %>
+  <body class="bg-gray-100 text-gray-800 font-[Inter]">
+    <%- include('../partials/navbar') %>
+
+    <div class="max-w-6xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-2xl">
+      <!-- Title -->
+      <h2 class="text-3xl font-bold text-purple-700 mb-6 text-center">
+        🩺 স্বেচ্ছাসেবী স্বাস্থ্যকর্মী ডিরেক্টরি
+      </h2>
+
+      <!-- Search Form -->
+      <form method="GET" class="mb-6 flex flex-wrap items-center justify-center gap-3">
+        <input
+          type="text"
+          name="district"
+          value="<%= query.district || '' %>"
+          placeholder="জেলা (e.g. Rajshahi)"
+          class="border border-gray-400 p-2 rounded-lg w-64 focus:ring-2 focus:ring-purple-500"
+        />
+
+        <select
+          name="skill"
+          class="border border-gray-400 p-2 rounded-lg w-64 focus:ring-2 focus:ring-purple-500"
+        >
+          <option value="">🔍 All Skills</option>
+          <option value="mental health" <%= query.skill === 'mental health' ? 'selected' : '' %>>🧠 Mental Health</option>
+          <option value="maternal health" <%= query.skill === 'maternal health' ? 'selected' : '' %>>🤰 Maternal Health</option>
+          <option value="child health" <%= query.skill === 'child health' ? 'selected' : '' %>>👶 Child Health</option>
+          <option value="nutrition" <%= query.skill === 'nutrition' ? 'selected' : '' %>>🍎 Nutrition</option>
+          <option value="first aid" <%= query.skill === 'first aid' ? 'selected' : '' %>>🚑 First Aid</option>
+          <option value="community awareness" <%= query.skill === 'community awareness' ? 'selected' : '' %>>🗣️ Community Awareness</option>
+        </select>
+
+        <div class="flex items-center justify-center gap-3 mt-2">
+          <button
+            type="submit"
+            class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+          >
+            Search
+          </button>
+
+          <a
+            href="/dashboard/volunteer"
+            class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition"
+          >
+            🔄 Refresh
+          </a>
+
+          <a
+            href="/dashboard/volunteer/add"
+            class="text-green-600 font-semibold hover:underline flex items-center gap-1"
+          >
+            <span>➕</span> Add Volunteer
+          </a>
+        </div>
+      </form>
+
+      <!-- Volunteer List -->
+      <% if (volunteers.length > 0) { %>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <% volunteers.forEach(v => { %>
+        <div class="border border-gray-300 p-5 rounded-xl bg-gray-50 hover:shadow-lg transition transform hover:-translate-y-1">
+          <h3 class="text-xl font-semibold text-purple-700 mb-3">
+            <%= v.name %> <%= v.verified ? "✅" : "" %>
+          </h3>
+
+          <ul class="space-y-1 text-sm">
+            <li><strong>🏡 গ্রাম:</strong> <%= v.village || 'N/A' %></li>
+            <li><strong>🌾 ইউনিয়ন:</strong> <%= v.union || 'N/A' %></li>
+            <li><strong>🏘️ উপজেলা:</strong> <%= v.upazila || 'N/A' %></li>
+            <li><strong>🗺️ জেলা:</strong> <%= v.district || 'N/A' %></li>
+            <li><strong>🎓 দক্ষতা:</strong> <%= v.skills.join(', ') %></li>
+            <li><strong>📞 যোগাযোগ:</strong> <%= v.contact || 'N/A' %></li>
+            <li><strong>⏰ সময়:</strong> <%= v.availableHours || 'N/A' %></li>
+            <li><strong>🏢 প্রশিক্ষণ:</strong> <%= v.trainedBy || 'N/A' %></li>
+          </ul>
+        </div>
+        <% }) %>
+      </div>
+      <% } else { %>
+      <p class="text-gray-600 text-center mt-6">কোনো স্বেচ্ছাসেবী স্বাস্থ্যকর্মী পাওয়া যায়নি।</p>
+      <% } %>
+    </div>
+  </body>
+</html>

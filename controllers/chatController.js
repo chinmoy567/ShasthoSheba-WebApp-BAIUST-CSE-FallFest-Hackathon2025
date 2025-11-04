@@ -6,12 +6,12 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// ✅ Render the chat page
+//  Render the chat page
 const getChatPage = async (req, res) => {
   if (!req.session.user) return res.redirect("/auth/login");
 
   try {
-    // 🔹 Find user's latest mood check-in
+    //  Find user's latest mood check-in
     const lastCheckin = await Checkin.findOne({ userId: req.session.user._id })
       .sort({ date: -1 })
       .lean();
@@ -32,7 +32,7 @@ const getChatPage = async (req, res) => {
   }
 };
 
-// ✅ Handle chat message
+// Handle chat message
 const postChatMessage = async (req, res) => {
   try {
     const { message } = req.body;

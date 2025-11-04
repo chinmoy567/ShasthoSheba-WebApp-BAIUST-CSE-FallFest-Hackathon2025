@@ -14,7 +14,7 @@ exports.chatWithAI = async (req, res) => {
       return res.status(400).json({ error: "No audio file uploaded" });
     }
 
-    // 1️⃣ Transcribe Bangla (auto-detect)
+    // 1️ Transcribe Bangla (auto-detect)
     const transcription = await openai.audio.transcriptions.create({
       file: fs.createReadStream(audioFile.path),
       model: "whisper-1",
@@ -22,7 +22,7 @@ exports.chatWithAI = async (req, res) => {
 
     const userSpeech = transcription.text?.trim() || "শব্দ শোনা যায়নি।";
 
-    // 2️⃣ Build chat messages
+    // 2️ Build chat messages
     const messages = [
       {
         role: "system",
@@ -33,14 +33,14 @@ exports.chatWithAI = async (req, res) => {
       { role: "user", content: userSpeech },
     ];
 
-    // 3️⃣ Generate AI reply
+    // 3️ Generate AI reply
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
       messages,
     });
     const aiText = completion.choices[0].message.content.trim();
 
-    // 4️⃣ Generate Bangla voice reply
+    // 4️ Generate Bangla voice reply
     const tts = await openai.audio.speech.create({
       model: "gpt-4o-mini-tts",
       voice: "alloy",
@@ -48,14 +48,14 @@ exports.chatWithAI = async (req, res) => {
     });
     const audioBuffer = Buffer.from(await tts.arrayBuffer());
 
-    // 5️⃣ Save to MongoDB
+    // 5️ Save to MongoDB
     await Voice.create({
       userId,
       inputText: userSpeech,
       aiResponse: aiText,
     });
 
-    // 6️⃣ Return to client
+    // 6️ Return to client
     res.json({
       userSpeech,
       aiText,

@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const { seedVolunteers } = require("./controllers/volunteerController");
 
 
 // External modules
@@ -16,6 +17,9 @@ const chatRoute = require("./routes/chatRouter");
 const symptomRoute = require("./routes/symptomRouter");
 const voiceRoute = require("./routes/voiceRouter");
 const maternalVoiceRoute = require("./routes/maternalVoiceRouter");
+const volunteerRoute = require("./routes/volunteerRouter");
+
+
 
 
 
@@ -56,10 +60,12 @@ app.use(express.json());
 // MongoDB Connection
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log(" Connected to MongoDB Atlas");
+  .then(async () => {
+    console.log("✅ Connected to MongoDB Atlas");
+    await seedVolunteers(); // Seed initial data from JSON
   })
-  .catch((err) => console.error(" MongoDB connection error:", err));
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
+
 
 
 // Middlewares
@@ -77,6 +83,8 @@ app.use("/dashboard/chat", chatRoute);
 app.use("/dashboard/symptom", symptomRoute);
 app.use("/dashboard/voice", voiceRoute);
 app.use("/dashboard/maternalvoice", maternalVoiceRoute);
+app.use("/dashboard/volunteer", volunteerRoute);
+
 
 
 // Start the server
