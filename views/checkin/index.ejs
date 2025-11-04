@@ -1,63 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- ✅ Shared Head Partial -->
-  <%- include("../partials/head", { title: "Mental Health Check-In" }) %>
-
-  <body class="bg-gray-100 min-h-screen font-[Inter]">
-    <!-- ✅ Shared Navbar -->
+  <%- include("../partials/head", { title: "মনোবন্ধু - মানসিক স্বাস্থ্য চেক-ইন" }) %>
+  <body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100">
     <%- include("../partials/navbar") %>
 
-    <!-- ✅ Check-In Container -->
-    <div class="max-w-3xl mx-auto mt-12 p-8 bg-white shadow-xl rounded-2xl">
-      <h2 class="text-3xl font-bold text-indigo-600 mb-6">
-        🧠 Mental Health Check-In
-      </h2>
+    <div class="max-w-3xl mx-auto mt-10 p-6 bg-blue-800/50 backdrop-blur-sm rounded-2xl card-shadow border border-blue-600/30">
+      <h2 class="text-2xl font-bold text-yellow-400 mb-4">🧠 ঝেড়ে যান আপনার মনের অবস্থা</h2>
 
-      <div class="flex justify-between items-center mb-4">
-        <p class="text-gray-700">
-          Hello, <strong><%= user.name %></strong> — record your daily mood and
-          thoughts below.
-        </p>
-
-        <a
-          href="/dashboard/checkin/new"
-          class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
-        >
-          + New Check-In
-        </a>
-      </div>
-
-      <!-- ✅ Check-in History List -->
-      <div class="mt-6">
-        <% if (checkins.length === 0) { %>
-        <p class="text-gray-500 text-center py-6">
-          No entries yet. Start your first check-in to track your mental health
-          journey. 💬
-        </p>
-        <% } else { %>
-        <ul class="space-y-4">
-          <% checkins.forEach(c => { %>
-          <li
-            class="p-4 border rounded-xl bg-gray-50 hover:shadow-md transition"
-          >
-            <p class="text-lg font-semibold"><%= c.mood %></p>
-            <p class="text-gray-600 mt-1">
-              <%= c.note || "No additional notes." %>
+      <!-- Check if last entry was more than 3 days ago -->
+      <% if (checkins.length > 0) { %>
+        <% 
+          const lastCheckin = checkins[0];
+          const daysDiff = Math.floor((new Date() - new Date(lastCheckin.date)) / (1000 * 60 * 60 * 24));
+        %>
+        <% if (daysDiff > 3) { %>
+          <div class="bg-yellow-500/20 border border-yellow-500/50 rounded-xl p-4 mb-4">
+            <p class="text-yellow-300 text-center">
+              তিনদিনেও আপনার দেখা না পেয়ে আমাদেরই মন খারাপ হয়ে গেল 😭 জলদি এসে মনের খবরাখবর দিয়ে যান
             </p>
-            <p class="text-sm text-gray-400 mt-2">
-              🕒 <%= new Date(c.date).toLocaleString("en-US", { dateStyle:
-              "medium", timeStyle: "short" }) %>
-            </p>
-          </li>
-          <% }) %>
-        </ul>
+          </div>
         <% } %>
-      </div>
+      <% } %>
+
+      <a
+        href="/dashboard/checkin/new"
+        class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-6 py-3 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition transform hover:scale-105 card-shadow border border-yellow-400"
+      >
+        + এখানে ক্লিক করে জানান
+      </a>
+
+      <ul class="mt-6 space-y-3">
+        <% if (checkins.length === 0) { %>
+          <p class="text-blue-200 mt-4">এখনও কোনো তথ্য নেই।</p>
+        <% } else { %>
+          <% checkins.forEach(c => { %>
+            <li class="p-4 border border-blue-600/30 rounded-xl bg-blue-800/30 backdrop-blur-sm card-shadow">
+              <p class="text-lg text-yellow-400"><%= c.mood %></p>
+              <p class="text-blue-200"><%= c.note || "" %></p>
+              <p class="text-sm text-blue-300"><%= c.date.toDateString() %></p>
+            </li>
+          <% }) %>
+        <% } %>
+      </ul>
     </div>
 
-    <!-- ✅ Footer -->
-    <footer class="mt-12 py-6 text-center text-gray-500 border-t">
-      <p>© 2025 ShasthoSheba | Health for Everyone</p>
+    <footer class="mt-10 py-6 text-center text-blue-300 border-t border-blue-700/30">
+      <p>© 2025 মনোবন্ধু | সবার জন্য স্বাস্থ্যসেবা</p>
     </footer>
+
+    <style>
+      .card-shadow { 
+        box-shadow: 0 12px 30px rgba(14, 12, 26, 0.5); 
+      }
+    </style>
   </body>
 </html>

@@ -1,55 +1,55 @@
 <!DOCTYPE html>
 <html lang="bn">
-  <%- include("../partials/head", { title: "উপসর্গ সচেতনতা গাইড" }) %>
-  <body class="bg-gray-100 min-h-screen">
+  <%- include("../partials/head", { title: "মনোবন্ধু - উপসর্গ সচেতনতা গাইড" }) %>
+  <body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100">
     <%- include("../partials/navbar") %>
 
-    <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
-      <h2 class="text-2xl font-semibold text-indigo-700 mb-4">
-        💉 উপসর্গ সচেতনতা নির্দেশিকা
+    <div class="max-w-4xl mx-auto mt-10 p-6 bg-blue-800/50 backdrop-blur-sm rounded-2xl card-shadow border border-blue-600/30">
+      <h2 class="text-2xl font-bold text-yellow-400 mb-4">
+        💉 রোগ শনাক্ত ও পরামর্শ
       </h2>
-      <p class="text-gray-600 mb-4">
-        আপনার উপসর্গ লিখুন (বাংলা বা ইংরেজিতে) এবং জানুন কখন ডাক্তার দেখানো
-        প্রয়োজন:
+      <p class="text-blue-200 mb-4">
+        আপনার উপসর্গ লিখুন, সাথে জানুন ডাক্তার দেখানো
+        লাগবে কিনা:
       </p>
 
       <form id="symptomForm" class="space-y-4">
         <textarea
           id="message"
           rows="4"
-          placeholder="যেমন: তিন দিন ধরে জ্বর আছে, মাথা ব্যথা করছে..."
-          class="w-full p-3 border rounded-md focus:ring-2 focus:ring-indigo-400"
+          placeholder="যেমন: তিন দিন ধরে জ্বর আছে, এক্স ছেড়ে চলে গেছে..."
+          class="w-full p-3 bg-blue-900/50 border border-blue-600/30 rounded-xl text-gray-100 placeholder-blue-300 focus:border-yellow-500/50 focus:outline-none"
           required
         ></textarea>
         <button
           type="submit"
-          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+          class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-6 py-3 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition transform hover:scale-105 card-shadow border border-yellow-400"
         >
-          বিশ্লেষণ করুন
+          জানুন
         </button>
       </form>
 
       <div
         id="responseBox"
-        class="hidden mt-6 bg-green-50 border border-green-300 p-4 rounded-lg"
+        class="hidden mt-6 bg-green-500/20 border border-green-500/50 p-4 rounded-xl card-shadow"
       >
-        <h3 class="text-lg font-semibold text-green-700">📋 বিশ্লেষণ ফলাফল:</h3>
-        <p id="responseText" class="mt-2 text-gray-800"></p>
+        <h3 class="text-lg font-bold text-green-400">📋 উত্তর:</h3>
+        <p id="responseText" class="mt-2 text-blue-100"></p>
       </div>
 
       <% if (history && history.length > 0) { %>
       <div class="mt-10">
-        <h3 class="text-lg font-semibold text-gray-700 mb-2">
-          🕓 পূর্বের বিশ্লেষণ:
+        <h3 class="text-lg font-bold text-yellow-400 mb-4">
+          🕓 পূর্বের উত্তরগুলো:
         </h3>
-        <ul class="space-y-2">
+        <ul class="space-y-3">
           <% history.forEach(item => { %>
-          <li class="border p-3 rounded-md bg-gray-50">
-            <p><strong>🩺 উপসর্গ:</strong> <%= item.symptomText %></p>
-            <p class="text-sm text-gray-600 mt-1">
+          <li class="border border-blue-600/30 p-4 rounded-xl bg-blue-800/30 backdrop-blur-sm card-shadow">
+            <p class="text-yellow-400"><strong>🩺 উপসর্গ:</strong> <%= item.symptomText %></p>
+            <p class="text-sm text-blue-200 mt-2">
               <%= item.aiResponse.substring(0, 100) %>...
             </p>
-            <p class="text-xs text-gray-500 mt-1">
+            <p class="text-xs text-blue-300 mt-2">
               📅 <%= new Date(item.createdAt).toLocaleString('bn-BD') %>
             </p>
           </li>
@@ -80,5 +80,11 @@
         responseText.innerHTML = data.reply;
       });
     </script>
+
+    <style>
+      .card-shadow { 
+        box-shadow: 0 12px 30px rgba(14, 12, 26, 0.5); 
+      }
+    </style>
   </body>
 </html>

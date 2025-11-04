@@ -1,31 +1,32 @@
-<%- include("../partials/head") %> <%- include("../partials/navbar") %>
+<%- include("../partials/head") %> 
+<%- include("../partials/navbar") %>
 
-<body class="bg-gray-100 font-sans flex flex-col min-h-screen">
+<body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100 font-sans flex flex-col">
   <div
-    class="flex flex-col max-w-4xl w-full mx-auto mt-8 bg-white shadow-lg rounded-2xl flex-grow overflow-hidden"
+    class="flex flex-col max-w-4xl w-full mx-auto mt-8 bg-blue-800/50 backdrop-blur-sm rounded-2xl flex-grow overflow-hidden card-shadow border border-blue-600/30"
   >
     <!-- Header -->
     <header
-      class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center py-4 text-2xl font-semibold tracking-wide"
+      class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 text-center py-4 text-2xl font-bold tracking-wide"
     >
-      🎤 ভয়েস চ্যাট - <span class="text-yellow-300">MonBondhu</span>
+      🎤 কথা বলুন <span class="text-gray-800">মনোবন্ধুর সাথে</span>
     </header>
 
     <!-- Chat Box -->
     <main
       id="chatBox"
-      class="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 scroll-smooth"
+      class="flex-1 overflow-y-auto p-6 space-y-4 bg-blue-900/30 scroll-smooth"
     ></main>
 
     <!-- Footer -->
     <footer
-      class="border-t border-gray-200 p-4 flex flex-col items-center bg-white"
+      class="border-t border-blue-600/30 p-4 flex flex-col items-center bg-blue-800/50"
     >
       <button
         id="recordBtn"
-        class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition duration-200"
+        class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 font-bold px-6 py-3 rounded-xl shadow transition duration-200 transform hover:scale-105 card-shadow border border-yellow-400"
       >
-        🎙 বলুন
+        🎙 এখানে ক্লিক দিয়ে কথা বলুন
       </button>
       <audio
         id="aiAudio"
@@ -49,7 +50,7 @@
       wrapper.innerHTML = isUser
         ? `
         <div class="flex justify-end w-full">
-          <div class="bg-indigo-600 text-white px-4 py-3 rounded-2xl rounded-br-sm max-w-[80%] shadow-md">
+          <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-4 py-3 rounded-2xl rounded-br-sm max-w-[80%] shadow-md">
             ${text}
           </div>
           <span class="text-2xl ml-2">👤</span>
@@ -57,7 +58,7 @@
         : `
         <div class="flex items-start w-full">
           <span class="text-2xl mr-2">🤖</span>
-          <div class="bg-gray-200 text-gray-900 px-4 py-3 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm">
+          <div class="bg-blue-700/50 text-blue-100 px-4 py-3 rounded-2xl rounded-bl-sm max-w-[80%] shadow-sm border border-blue-600/30">
             ${text}
           </div>
         </div>`;
@@ -71,10 +72,10 @@
       typingDiv.classList.add("flex", "items-start", "gap-3", "typing");
       typingDiv.innerHTML = `
         <span class="text-2xl">🤖</span>
-        <div class="flex space-x-1 bg-gray-200 rounded-full px-3 py-2">
-          <span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></span>
-          <span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-150"></span>
-          <span class="w-2 h-2 bg-gray-500 rounded-full animate-bounce delay-300"></span>
+        <div class="flex space-x-1 bg-blue-700/50 rounded-full px-3 py-2 border border-blue-600/30">
+          <span class="w-2 h-2 bg-yellow-400 rounded-full animate-bounce"></span>
+          <span class="w-2 h-2 bg-yellow-400 rounded-full animate-bounce delay-150"></span>
+          <span class="w-2 h-2 bg-yellow-400 rounded-full animate-bounce delay-300"></span>
         </div>`;
       chatBox.appendChild(typingDiv);
       chatBox.scrollTop = chatBox.scrollHeight;
@@ -98,12 +99,12 @@
 
       const chunks = [];
       btn.innerText = "🎙 রেকর্ড হচ্ছে...";
-      btn.classList.add("bg-yellow-500");
+      btn.classList.add("bg-gradient-to-r", "from-red-500", "to-red-600");
       recorder.ondataavailable = (e) => chunks.push(e.data);
 
       recorder.onstop = async () => {
         btn.innerText = "🎤 বলুন";
-        btn.classList.remove("bg-yellow-500");
+        btn.classList.remove("bg-gradient-to-r", "from-red-500", "to-red-600");
 
         const blob = new Blob(chunks, { type: "audio/webm" });
         const formData = new FormData();
@@ -164,6 +165,9 @@
     }
     .delay-300 {
       animation-delay: 0.3s;
+    }
+    .card-shadow { 
+      box-shadow: 0 12px 30px rgba(14, 12, 26, 0.5); 
     }
   </style>
 </body>

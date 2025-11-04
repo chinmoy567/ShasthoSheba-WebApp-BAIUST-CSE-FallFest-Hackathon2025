@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Char Kolapara Community Clinic",
+    "type": "Clinic",
+    "division": "Barisal",
+    "district": "Patuakhali",
+    "upazila": "Kolapara",
+    "address": "Near the big mango tree, Kolapara",
+    "contact": "01711-123456",
+    "latitude": 22.35,
+    "longitude": 90.30
+  },
+  {
+    "name": "Upazila Health Complex Kolapara",
+    "type": "Hospital",
+    "division": "Barisal",
+    "district": "Patuakhali",
+    "upazila": "Kolapara",
+    "address": "Main Road, Kolapara Bazar",
+    "contact": "01722-987654",
+    "latitude": 22.37,
+    "longitude": 90.31
+  },
+  {
+    "name": "Rangabali Rural Clinic",
+    "type": "Clinic",
+    "division": "Barisal",
+    "district": "Patuakhali",
+    "upazila": "Rangabali",
+    "address": "Next to Rangabali School",
+    "contact": "01888-123789",
+    "latitude": 21.98,
+    "longitude": 90.45
+  }
+]

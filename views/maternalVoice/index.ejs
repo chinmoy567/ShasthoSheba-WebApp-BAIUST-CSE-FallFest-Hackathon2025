@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="bn">
-  <%- include('../partials/head', { title: '🎤 মাতৃ ও শিশুর ভয়েস ট্র্যাকার' }) %>
-  <body class="bg-gray-100 font-[Inter]">
-    <div class="max-w-2xl mx-auto mt-12 bg-white p-8 shadow-xl rounded-2xl text-center">
-      <h1 class="text-2xl font-bold text-indigo-600 mb-4">
-        🎤 মাতৃ ও শিশুর স্বাস্থ্য ট্র্যাকার (Voice Input)
+  <%- include('../partials/head', { title: 'মনোবন্ধু - মাতৃ ও শিশুর ভয়েস ট্র্যাকার' }) %>
+  <body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100 font-[Inter]">
+    <div class="max-w-2xl mx-auto mt-12 bg-blue-800/50 backdrop-blur-sm p-8 rounded-2xl card-shadow border border-blue-600/30 text-center">
+      <h1 class="text-2xl font-bold text-yellow-400 mb-4">
+         মাতৃ ও শিশু নিরাপত্তা
       </h1>
-      <p class="text-gray-600 mb-4">
-        বলুন বা নির্বাচন করুন: “আমি গর্ভবতী” অথবা “আমার শিশুর জন্ম তারিখ ১ জানুয়ারি ২০২৫”
+      <p class="text-blue-200 mb-4">
+        নিচের অপশনগুলো থেকে নির্বাচন করুন, অথবা "বলুন" ক্লিক করে মুখে বলুন। যেমনঃ "আমি গর্ভবতী" অথবা "আমার শিশুর জন্ম তারিখ ১ জানুয়ারি ২০২৫"
       </p>
 
       <form action="/dashboard/maternalvoice" method="POST" id="maternalForm" class="space-y-4">
-        <select name="type" class="w-full border px-4 py-2 rounded-md" required>
-          <option value="mother">গর্ভবতী মা</option>
-          <option value="child">শিশু</option>
+        <select name="type" class="w-full bg-blue-900/50 border border-blue-600/30 px-4 py-3 rounded-xl text-gray-100 focus:border-yellow-500/50 focus:outline-none" required>
+          <option value="mother" class="bg-blue-900">গর্ভবতী মা</option>
+          <option value="child" class="bg-blue-900">শিশু</option>
         </select>
 
-        <input type="date" name="date" id="dateInput" required class="w-full border px-4 py-2 rounded-md" />
+        <input type="date" name="date" id="dateInput" required class="w-full bg-blue-900/50 border border-blue-600/30 px-4 py-3 rounded-xl text-gray-100 focus:border-yellow-500/50 focus:outline-none" />
 
-        <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 w-full">
-          🗓️ সময়সূচি তৈরি করুন
+        <button type="submit" class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-6 py-3 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition transform hover:scale-105 card-shadow border border-yellow-400 w-full">
+           সময়সূচি বানান
         </button>
       </form>
 
       <div class="mt-6">
         <button
           id="voiceBtn"
-          class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg text-lg"
+          class="bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-3 rounded-xl font-bold hover:from-purple-400 hover:to-purple-500 transition transform hover:scale-105 card-shadow border border-purple-400 text-lg"
         >
-          🎙️ বলুন
+           বলুন
         </button>
-        <p id="voiceResult" class="mt-4 text-gray-700"></p>
+        <p id="voiceResult" class="mt-4 text-blue-200"></p>
       </div>
     </div>
 
@@ -47,21 +47,27 @@
 
         voiceBtn.addEventListener("click", () => {
           recognition.start();
-          voiceResult.textContent = "🎧 শুনছি...";
+          voiceResult.textContent = " কথা শোনা হচ্ছে...";
         });
 
         recognition.onresult = (event) => {
           const result = event.results[0][0].transcript;
-          voiceResult.textContent = "আপনি বললেন: " + result;
+          voiceResult.textContent = "যা শোনা গেল: " + result;
 
           const match = result.match(/\d{1,2}\s*[এ|ই]*\s*[জানুয়ারি|ফেব্রুয়ারি|মার্চ|এপ্রিল|মে|জুন|জুলাই|আগস্ট|সেপ্টেম্বর|অক্টোবর|নভেম্বর|ডিসেম্বর]\s*\d{4}/);
           if (match) {
-            alert("তারিখ শনাক্ত করা হয়েছে: " + match[0]);
+            alert("তারিখ: " + match[0]);
           }
         };
       } else {
-        voiceResult.textContent = "❌ আপনার ব্রাউজারে ভয়েস সাপোর্ট নেই।";
+        voiceResult.textContent = "আপনার ব্রাউজারে কথা বলা যাবে না।";
       }
     </script>
+
+    <style>
+      .card-shadow { 
+        box-shadow: 0 12px 30px rgba(14, 12, 26, 0.5); 
+      }
+    </style>
   </body>
 </html>

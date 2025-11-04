@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("../partials/head", { title: "AI Chat Companion" }) %>
-  <body class="bg-gray-100 min-h-screen flex flex-col">
+  <%- include("../partials/head", { title: "মনোবন্ধু - AI Chat Companion" }) %>
+  <body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100 flex flex-col">
     <%- include("../partials/navbar") %>
 
-    <div class="max-w-3xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl">
-      <h2 class="text-2xl font-bold text-indigo-600 mb-4 text-center">
-        🤖 ShasthoSheba AI Chat Companion
+    <div class="max-w-3xl mx-auto mt-10 p-6 bg-blue-800/50 backdrop-blur-sm rounded-2xl card-shadow border border-blue-600/30">
+      <h2 class="text-2xl font-bold text-yellow-400 mb-4 text-center">
+        মনোবন্ধুকে লিখে দিন আপনার যাবতীয় সমস্যা
       </h2>
 
       <div
         id="chatBox"
-        class="h-96 overflow-y-auto border p-4 rounded bg-gray-50 mb-4"
+        class="h-96 overflow-y-auto border border-blue-600/30 p-4 rounded-xl bg-blue-900/30 mb-4"
       ></div>
 
       <form id="chatForm" class="flex space-x-2">
@@ -19,15 +19,15 @@
           type="text"
           id="userInput"
           name="message"
-          placeholder="Type your message..."
-          class="flex-1 border p-2 rounded focus:outline-indigo-600"
+          placeholder="এখানে লিখুন"
+          class="flex-1 bg-blue-900/50 border border-blue-600/30 p-3 rounded-xl text-gray-100 placeholder-blue-300 focus:border-yellow-500/50 focus:outline-none"
           required
         />
         <button
           type="submit"
-          class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
+          class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-6 py-3 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition transform hover:scale-105 card-shadow border border-yellow-400"
         >
-          Send
+          উত্তর পান
         </button>
       </form>
     </div>
@@ -42,7 +42,7 @@
         const message = userInput.value.trim();
         if (!message) return;
 
-        chatBox.innerHTML += `<div class='text-right text-blue-600 my-2'><b>You:</b> ${message}</div>`;
+        chatBox.innerHTML += `<div class='text-right text-yellow-400 my-2'><b>You:</b> ${message}</div>`;
         userInput.value = "";
 
         const res = await fetch("/dashboard/chat", {
@@ -52,9 +52,15 @@
         });
 
         const data = await res.json();
-        chatBox.innerHTML += `<div class='text-left text-gray-700 my-2'><b>AI:</b> ${data.reply}</div>`;
+        chatBox.innerHTML += `<div class='text-left text-blue-200 my-2'><b>AI:</b> ${data.reply}</div>`;
         chatBox.scrollTop = chatBox.scrollHeight;
       });
     </script>
+
+    <style>
+      .card-shadow { 
+        box-shadow: 0 12px 30px rgba(14, 12, 26, 0.5); 
+      }
+    </style>
   </body>
 </html>

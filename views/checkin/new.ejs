@@ -1,40 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include("../partials/head", { title: "New Check-In" }) %>
-  <body class="bg-gray-100 min-h-screen">
+  <%- include("../partials/head", { title: "মনোবন্ধু - নতুন চেক-ইন" }) %>
+  <body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100">
     <%- include("../partials/navbar") %>
 
-    <div class="max-w-md mx-auto mt-10 p-6 bg-white rounded-xl shadow">
-      <h2 class="text-2xl font-semibold mb-4">How are you feeling today?</h2>
+    <div class="max-w-md mx-auto mt-10 p-6 bg-blue-800/50 backdrop-blur-sm rounded-2xl card-shadow border border-blue-600/30">
+      <h2 class="text-2xl font-bold text-yellow-400 mb-4">বলুন, আজ কেমন লাগছে আপনার?</h2>
 
       <form method="POST" action="/dashboard/checkin/new" class="space-y-4">
-        <select name="mood" class="w-full border rounded p-2" required>
-          <option value="">Select mood</option>
-          <option>😊 Happy</option>
-          <option>😐 Neutral</option>
-          <option>😔 Sad</option>
-          <option>😤 Stressed</option>
-          <option>😴 Tired</option>
+        <select name="mood" class="w-full bg-blue-900/50 border border-blue-600/30 rounded-xl p-3 text-gray-100 focus:border-yellow-500/50 focus:outline-none" required>
+          <option value="" class="bg-blue-900">আপনার মনের অবস্থা বলুন</option>
+          <option>😊 আমার থেকে খুশি আর কেউ নেই দুনিয়ায়</option>
+          <option>😐 কোনমতে যায় আরকি</option>
+          <option>😔 মন খারাপ অনেক</option>
+          <option>😤 চাপে চ্যাপ্টা হয়ে যাচ্ছি</option>
+          <option>😤 মনে করছে আছাড় মেরে কিছু ভেঙ্গে ফেলতে</option>
+          <option>😴 হয়রান লাগে ভাই</option>
         </select>
 
         <textarea
           name="note"
           rows="3"
-          placeholder="Add a note (optional)"
-          class="w-full border rounded p-2"
+          placeholder="বিস্তারিত বলার থাকলে এখানে মন খুলে বলতে পারেন"
+          class="w-full bg-blue-900/50 border border-blue-600/30 rounded-xl p-3 text-gray-100 placeholder-blue-300 focus:border-yellow-500/50 focus:outline-none"
         ></textarea>
 
         <button
           type="submit"
-          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-6 py-3 rounded-xl font-bold hover:from-yellow-400 hover:to-yellow-500 transition transform hover:scale-105 card-shadow border border-yellow-400"
         >
-          Save
+          সংরক্ষণ করুন
         </button>
       </form>
     </div>
 
-    <footer class="mt-10 py-6 text-center text-gray-500 border-t">
-      <p>© 2025 ShasthoSheba | Health for Everyone</p>
+    <footer class="mt-10 py-6 text-center text-blue-300 border-t border-blue-700/30">
+      <p>© 2025 মনোবন্ধু | সবার জন্য স্বাস্থ্যসেবা</p>
     </footer>
+
+    <style>
+      .card-shadow { 
+        box-shadow: 0 12px 30px rgba(14, 12, 26, 0.5); 
+      }
+    </style>
   </body>
 </html>

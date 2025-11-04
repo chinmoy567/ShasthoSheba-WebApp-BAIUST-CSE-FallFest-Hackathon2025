@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head", { title: "Community Health Events" }) %>
+  <body class="bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-900 min-h-screen text-gray-100">
+    <%- include("../partials/navbar") %>
+
+    <div class="max-w-5xl mx-auto mt-10 p-6 bg-blue-800/50 rounded-2xl backdrop-blur-sm border border-blue-600/30">
+      <h1 class="text-3xl font-bold text-yellow-400 mb-6 text-center">Upcoming Health Events</h1>
+
+      <% if (events.length === 0) { %>
+        <p class="text-center text-blue-200">No upcoming events found. Check back soon!</p>
+      <% } else { %>
+        <ul class="space-y-4">
+          <% events.forEach(e => { %>
+            <li class="bg-blue-900/40 p-5 rounded-xl shadow hover:shadow-lg transition border border-blue-600/30">
+              <h2 class="text-2xl font-semibold text-yellow-400"><%= e.title %></h2>
+              <p class="text-blue-200 text-sm mb-2"><%= e.description || 'No description provided.' %></p>
+              <div class="text-sm text-blue-300">
+                <p><b>Type:</b> <%= e.type %></p>
+                <p><b>Date:</b> <%= new Date(e.date).toDateString() %> <%= e.time ? 'at ' + e.time : '' %></p>
+                <p><b>Location:</b> <%= e.location %></p>
+                <p><b>Organizer:</b> <%= e.organizer || 'N/A' %></p>
+                <p><b>Contact:</b> <%= e.contact || 'N/A' %></p>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      <% } %>
+    </div>
+  </body>
+</html>

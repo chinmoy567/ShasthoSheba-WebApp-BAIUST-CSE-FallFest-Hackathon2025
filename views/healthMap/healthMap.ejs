@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head', { title: 'Community Health Map' }) %>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    #map { height: 500px; width: 100%; border-radius: 12px; margin-top: 1rem; }
+    #loading { text-align: center; color: #2563eb; margin-top: 1rem; }
+  </style>
+</head>
+
+<body class="bg-gray-100 text-gray-800">
+  <%- include('../partials/navbar') %>
+
+  <div class="max-w-6xl mx-auto px-6 py-8">
+    <h1 class="text-3xl font-bold mb-4 text-center text-blue-700">
+      🗺️ Community Health Map
+    </h1>
+
+    <!-- Map Section -->
+    <div id="map"></div>
+    <div id="loading">📍 Detecting your location...</div>
+
+    <!-- Facility List -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold mb-3">Nearest Facilities</h2>
+      <ul id="facilityList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></ul>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([23.6850, 90.3563], 7); // default Bangladesh center
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    const facilityList = document.getElementById("facilityList");
+    const loadingMsg = document.getElementById("loading");
+
+    // 🧭 Step 1: Get current user location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          const lat = pos.coords.latitude;
+          const lon = pos.coords.longitude;
+          loadingMsg.textContent = "✅ Location found! Loading nearby facilities...";
+
+          // Show user’s position on the map
+          const userMarker = L.marker([lat, lon], { title: "You are here" }).addTo(map);
+          userMarker.bindPopup("<b>You are here</b>").openPopup();
+
+          // 🗂️ Step 2: Fetch sorted facilities from backend
+          const res = await fetch(`/dashboard/healthmap/data?lat=${lat}&lon=${lon}`);
+          const data = await res.json();
+
+          // 🗺️ Step 3: Add facility markers + list
+          facilityList.innerHTML = "";
+          const markers = [];
+
+          data.forEach(f => {
+            if (f.latitude && f.longitude) {
+              const marker = L.marker([f.latitude, f.longitude]).addTo(map);
+              marker.bindPopup(`<b>${f.name}</b><br>${f.type}<br>${f.address}`);
+              markers.push([f.latitude, f.longitude]);
+
+              // Add to list
+              facilityList.innerHTML += `
+                <li class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition">
+                  <h3 class="text-lg font-bold">${f.name}</h3>
+                  <p class="text-sm text-gray-600">${f.type}</p>
+                  <p class="text-sm text-gray-600">${f.address || 'No address'}</p>
+                  <p class="text-sm text-gray-600">${f.contact || 'No contact info'}</p>
+                </li>
+              `;
+            }
+          });
+
+          if (markers.length > 0) {
+            map.fitBounds(L.latLngBounds(markers.concat([[lat, lon]])), { padding: [50, 50] });
+          }
+
+          loadingMsg.textContent = "";
+        },
+        (err) => {
+          loadingMsg.textContent = "⚠️ Could not get your location. Showing default map.";
+        }
+      );
+    } else {
+      loadingMsg.textContent = "❌ Geolocation not supported by your browser.";
+    }
+  </script>
+</body>
+</html>

@@ -18,7 +18,9 @@ const symptomRoute = require("./routes/symptomRouter");
 const voiceRoute = require("./routes/voiceRouter");
 const maternalVoiceRoute = require("./routes/maternalVoiceRouter");
 const volunteerRoute = require("./routes/volunteerRouter");
-
+const healthMapRoute = require("./routes/healthMapRouter");
+const healthEventRoute = require("./routes/healthEventRouter");
+const seasonalRoute = require("./routes/seasonalRouter");
 
 
 
@@ -48,6 +50,18 @@ app.use(
 );
 
 
+// //  for display the  session 
+// app.use((req, res, next) => {
+//   if (req.session) {
+//     console.log("🧠 Session Data:");
+//     console.log(req.session);
+//   } else {
+//     console.log("⚠️ No session found for this request.");
+//   }
+//   next();
+// });
+
+
 
 //for views
 app.set("view engine", "ejs");
@@ -61,10 +75,10 @@ app.use(express.json());
 mongoose
   .connect(process.env.MONGO_URI)
   .then(async () => {
-    console.log("✅ Connected to MongoDB Atlas");
+    console.log(" Connected to MongoDB Atlas");
     await seedVolunteers(); // Seed initial data from JSON
   })
-  .catch((err) => console.error("❌ MongoDB connection error:", err));
+  .catch((err) => console.error(" MongoDB connection error:", err));
 
 
 
@@ -84,6 +98,13 @@ app.use("/dashboard/symptom", symptomRoute);
 app.use("/dashboard/voice", voiceRoute);
 app.use("/dashboard/maternalvoice", maternalVoiceRoute);
 app.use("/dashboard/volunteer", volunteerRoute);
+app.use("/dashboard/healthmap", healthMapRoute);
+app.use("/dashboard/events", healthEventRoute);
+app.use("/dashboard/seasonal", seasonalRoute);
+
+
+
+
 
 
 
