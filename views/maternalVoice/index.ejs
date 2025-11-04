@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <%- include('../partials/head', { title: '🎤 মাতৃ ও শিশুর ভয়েস ট্র্যাকার' }) %>
+  <body class="bg-gray-100 font-[Inter]">
+    <div class="max-w-2xl mx-auto mt-12 bg-white p-8 shadow-xl rounded-2xl text-center">
+      <h1 class="text-2xl font-bold text-indigo-600 mb-4">
+        🎤 মাতৃ ও শিশুর স্বাস্থ্য ট্র্যাকার (Voice Input)
+      </h1>
+      <p class="text-gray-600 mb-4">
+        বলুন বা নির্বাচন করুন: “আমি গর্ভবতী” অথবা “আমার শিশুর জন্ম তারিখ ১ জানুয়ারি ২০২৫”
+      </p>
+
+      <form action="/dashboard/maternalvoice" method="POST" id="maternalForm" class="space-y-4">
+        <select name="type" class="w-full border px-4 py-2 rounded-md" required>
+          <option value="mother">গর্ভবতী মা</option>
+          <option value="child">শিশু</option>
+        </select>
+
+        <input type="date" name="date" id="dateInput" required class="w-full border px-4 py-2 rounded-md" />
+
+        <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 w-full">
+          🗓️ সময়সূচি তৈরি করুন
+        </button>
+      </form>
+
+      <div class="mt-6">
+        <button
+          id="voiceBtn"
+          class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg text-lg"
+        >
+          🎙️ বলুন
+        </button>
+        <p id="voiceResult" class="mt-4 text-gray-700"></p>
+      </div>
+    </div>
+
+    <script>
+      const voiceBtn = document.getElementById("voiceBtn");
+      const voiceResult = document.getElementById("voiceResult");
+      const dateInput = document.getElementById("dateInput");
+
+      if ("webkitSpeechRecognition" in window) {
+        const recognition = new webkitSpeechRecognition();
+        recognition.lang = "bn-BD";
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        voiceBtn.addEventListener("click", () => {
+          recognition.start();
+          voiceResult.textContent = "🎧 শুনছি...";
+        });
+
+        recognition.onresult = (event) => {
+          const result = event.results[0][0].transcript;
+          voiceResult.textContent = "আপনি বললেন: " + result;
+
+          const match = result.match(/\d{1,2}\s*[এ|ই]*\s*[জানুয়ারি|ফেব্রুয়ারি|মার্চ|এপ্রিল|মে|জুন|জুলাই|আগস্ট|সেপ্টেম্বর|অক্টোবর|নভেম্বর|ডিসেম্বর]\s*\d{4}/);
+          if (match) {
+            alert("তারিখ শনাক্ত করা হয়েছে: " + match[0]);
+          }
+        };
+      } else {
+        voiceResult.textContent = "❌ আপনার ব্রাউজারে ভয়েস সাপোর্ট নেই।";
+      }
+    </script>
+  </body>
+</html>
